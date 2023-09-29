@@ -38,16 +38,16 @@ public class AccountDAO extends DBContext {
                 acc.setRole(role);
                 acc.setPassword(password);
                 list.add(acc);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-    
+
     public Account checkAcc(String username, String password) {
-        
+
         for (Account account : getList()) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
                 return account;
@@ -55,16 +55,7 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
-    
-    public int getRole(String username) {
-        for (Account account : getList()) {
-            if (account.getUsername().equals(username)) {
-                return account.getId();
-            }
-        }
-        return -1;
-    }
-    
+
     public int AddAccountFromAddmin(String username, String password, int role) {
         //connect db
         connection = getConnection();
@@ -74,10 +65,10 @@ public class AccountDAO extends DBContext {
                 + "           ,[role])\n"
                 + "     VALUES\n"
                 + "           (?,?,?)";
-        
+
         try {
             //  prepare command
-            statement = connection.prepareStatement(sql,statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setInt(3, role);
@@ -89,5 +80,39 @@ public class AccountDAO extends DBContext {
         } catch (SQLException ex) {
         }
         return -1;
+    }
+
+    public void deleteAccountByID(int id) {
+        //connect db
+        connection = getConnection();
+        String sql = "DELETE FROM [dbo].[Account]\n"
+                + "      WHERE id = ?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateAcc(int idUpdate, String usernameUPdate, String passwordUpdate, int roleUpdate) {
+        connection = getConnection();
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET [username] = ?\n"
+                + "      ,[password] = ?\n"
+                + "      ,[role] = ?\n"
+                + " WHERE id =?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, usernameUPdate);
+            statement.setString(2, passwordUpdate);
+            statement.setInt(3, roleUpdate);
+            statement.setInt(4, idUpdate);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

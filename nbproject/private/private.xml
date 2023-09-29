@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/web/login.jsp</file>
-            <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/web/listbookForUser.jsp</file>
             <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/model/Book.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/web/ForAdmin.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/controller/AdminAccountCRUD.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/dal/BookDAO.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/dal/AccountDAO.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/PRJ301/PRJ301_hocngoai/PracticeAuthentication/src/java/controller/AddAndBuyBook.java</file>
         </group>
     </open-files>
 </project-private>

@@ -39,24 +39,22 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("notification", "Username or password notvalid");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            switch (dao.getRole(username)) {
-                case 1:
-                    request.setAttribute("listBook", bookdao.getList());
-                    request.setAttribute("listAccount", dao.getList());
-                    request.getRequestDispatcher("ForAdmin.jsp").forward(request, response);
-                    break;
-                case 2:
-                    request.setAttribute("listBook", bookdao.getList());
-                    request.getRequestDispatcher("listbookForUser.jsp").forward(request, response);
+            if (dao.checkAcc(username, password).getRole() ==1) {
 
-                    break;
+                request.setAttribute("listBook", bookdao.getList());
+                request.setAttribute("listAccount", dao.getList());
+                request.getRequestDispatcher("ForAdmin.jsp").forward(request, response);
 
-                default:
-                    throw new AssertionError();
+            } else {
+                request.setAttribute("listBook", bookdao.getList());
+                request.getRequestDispatcher("listbookForUser.jsp").forward(request, response);
+
             }
-
         }
 
     }
 
 }
+
+
+

@@ -18,34 +18,51 @@ import java.io.PrintWriter;
  */
 public class AdminAccountCRUD extends HttpServlet {
 
-  
-AccountDAO dao =new AccountDAO();
+    AccountDAO dao = new AccountDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       //get action
-       String action = request.getParameter("action");
+        //get action
+        String action = request.getParameter("action");
         switch (action) {
             case "add":
-                String username  = request.getParameter("username");
-                String password  = request.getParameter("password");
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
                 int role = Integer.parseInt(request.getParameter("role"));
-                dao.AddAccountFromAddmin(username,password,role);
+                dao.AddAccountFromAddmin(username, password, role);
                 request.setAttribute("listAccount", dao.getList());
-                request.getRequestDispatcher("ForAdmin.jsp").forward(request, response);
+
+                break;
+            case "delete":
+                //get id
+                int id = Integer.parseInt(request.getParameter("id"));
+                //delete by id
+                dao.deleteAccountByID(id);
+                //storage listAccount to request
+                request.setAttribute("listAccount", dao.getList());
+                break;
+            case "update":
+                //get id,username,password,role
+                int idUpdate = Integer.parseInt(request.getParameter("id"));
+                String usernameUPdate = request.getParameter("username");
+                String passwordUpdate = request.getParameter("password");
+                int roleUpdate = Integer.parseInt(request.getParameter("role"));
+                dao.updateAcc(idUpdate,usernameUPdate,passwordUpdate,roleUpdate);
+                                request.setAttribute("listAccount", dao.getList());
+
                 break;
             default:
                 throw new AssertionError();
         }
+        request.getRequestDispatcher("ForAdmin.jsp").forward(request, response);
+
     }
 
-    
 }
